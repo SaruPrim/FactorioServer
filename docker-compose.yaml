@@ -1,0 +1,18 @@
+services:
+  factorio:
+    image: saruprim/factorio
+    container_name: factorio
+    ports:
+      - 34197:34197/udp
+    volumes:
+      - factorio:/factorio
+    # environment:
+      # ELEVATED_RAILS: "true"
+      # QUALITY: "true"
+      # SPACE_AGE: "true"
+      # VERSION: "2.0.47"
+    network_mode: bridge
+    restart: unless-stopped
+volumes:
+  factorio:
+    name: factorio
