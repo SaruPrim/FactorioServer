@@ -22,7 +22,7 @@ jobs:
           password: ${{ secrets.DOCKERHUN_TOKEN  }}
 
       - name: Build and Push to Docker Hub
-        uses: docker/build-push-acction@v6
+        uses: docker/build-push-action@v6
         with:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME  }}/factorio
