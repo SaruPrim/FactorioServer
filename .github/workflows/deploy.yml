@@ -4,20 +4,24 @@ on:
   push:
     branches: ["main"]
 
-steps:
-  - name: Checkout code
-    uses: actions/checkout@v4
+jobs:
+  deploy:
+    run-on: ubuntu-latest
 
-  - name: Connect to EC2 and Deploy
-    uses: appleboy/ssh-action@v1
-    with:
-      host: ${{ secrets.AWS_HOST }}
-      username: ${{ secrets.AWS_USER }}
-      key: ${{ secrets.AWS_SSH_KEY }}
-      port: ${{ aecrets.AWS_PORT }}
-      script: |
-        docker pull saruprim/factorio:latest
-        docker stop factorio || true
-        docker rm factorio || true
-        docker run -d --name factorio -p 34197:34197/udp -v factorio:/factorio --restart=unless-stopped saruprim/factorio
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Connect to EC2 and Deploy
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USER }}
+          key: ${{ secrets.AWS_SSH_KEY }}
+          port: ${{ aecrets.AWS_PORT }}
+          script: |
+            docker pull saruprim/factorio:latest
+            docker stop factorio || true
+            docker rm factorio || true
+            docker run -d --name factorio -p 34197:34197/udp -v factorio:/factorio --restart=unless-stopped saruprim/factorio
 
