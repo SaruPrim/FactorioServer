@@ -18,7 +18,7 @@ jobs:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USER }}
           key: ${{ secrets.AWS_SSH_KEY }}
-          port: ${{ aecrets.AWS_PORT }}
+          port: ${{ secrets.AWS_PORT }}
           script: |
             docker pull saruprim/factorio:latest
             docker stop factorio || true
