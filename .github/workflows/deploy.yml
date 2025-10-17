@@ -26,3 +26,12 @@ jobs:
             docker rm factorio || true
             docker run -d --name factorio -p 34197:34197/udp -v factorio:/factorio --restart=unless-stopped saruprim/factorio
 
+            eche "Check working..."
+            sleep 10
+            if [[ $(docker inspect --format={{.State.Status}} factorio) == "running" ]]; then
+              echo "Server Factorio is OK"
+            else
+              echo "Server Factorio is NOK!!!"
+              exit 1
+            fi
+     
